@@ -124,28 +124,22 @@ void spiral(int **a, int m, int n){
     i = 1;
     j = 1;
 
-    while (s <= m * n) {
+    while ((s < m * n)) {
             while (a[i][j + 1] == 0) {
                 a[i][j] = s;
-                s++;j++;
-
-            }
+                s++;j++;}
             while (a[i + 1][j] == 0) {
                 a[i][j] = s;
-                s++;i++;
-
-            }
+                s++;i++;}
             while (a[i][j - 1] == 0) {
                 a[i][j] = s;
-                s++;j--;
-
-            }
-            while ((a[i - 1][j] == 0) ||(s==m*n)) {
+                s++;j--;}
+            while (a[i - 1][j] == 0) {
                 a[i][j] = s;
-                s++;i--;
+                s++;i--;}
 
-            }
         }
+        if(s==m*n) a[i][j]=s;
 }
 
 int dva(){
@@ -179,203 +173,198 @@ int dva(){
     free(a);
     return 0;
 }
-int diagonal(double **a, int n, int m){
-    int k=0, index;
-    double max;
-    while (k < n)
-  {
-        max = fabs(a[k][k]);
-        index = k;
-        for (int i = k + 1; i < n; i++)
-        {
-        if (fabs(a[i][k]) > max)
-        {
-            max = fabs(a[i][k]);
-            index = i;
-        }
-        }//ищем максимум в столбце
+//int diagonal(double **a, int n, int m)
+//{
+//    int k=0, index;
+//    double max;
+//    while (k < n)
+//  {
+//        max = fabs(a[k][k]);
+//        index = k;
+//        for (int i = k + 1; i < n; i++)
+//        {
+//        if (fabs(a[i][k]) > max)
+//        {
+//            max = fabs(a[i][k]);
+//            index = i;
+//        }
+//        }//ищем максимум в столбце
+//
+//
+//
+//        if (max < 0.000001)
+//        {
+//            printf("Something went wrong");
+//            return 0;  //столбец нулевой, всё плохо
+//        }
+//        int* temp = a[index];
+//        a[index] = a[k];
+//        a[k] = temp;     //меняем строки
+//        for (int i = k; i < n; i++)
+//            {
+//                double temp = a[i][k];
+//                if (fabs(temp) < 0.000001) continue;
+//                for (int j = 0; j < n+m; j++)
+//                    a[i][j] = a[i][j] / temp;//делим строку на элемент из главной диагонали
+//                if (i == k)  continue;
+//                for (int j = 0; j < n+m; j++)
+//                    a[i][j] = a[i][j] - a[k][j];//вычитаем строку из строк ниже этой строки
+//            }
+//    k++;
+//  }
+//
+//
+//    return 1;
+//}
+//
+//
+//void root(double **a, int n, int m)
+//{     //обратный ход
+//    for (int i = n - 1; i > -1; i--)
+//    {
+//        for (int row = i - 1; row > -1; row--)
+//        {
+//            double b = a[row][i] / a[i][i];
+//            for (int col = n+m; col > -1; col--)
+//                a[row][col] = a[row][col] - a[i][col] * b;
+//
+//        }
+//    }
+//
+//
+//
+//}
+//
+////int multiplication(double **a, double **aa, double **c, int n)
+////{
+//int i,j,k;
+//
+//
+//  // Умножение матриц
+//
+//    for(i = 0; i < n; i++)
+//    for(j = 0; j < n; j++)
+//    {
+//        c[i][j] = 0;
+//        for(k = 0; k < n; k++)
+//            c[i][j] += a[i][k+n] * aa[k][j];
+//    }
+//
+//
+//
+//
+//  return 0;}
+
+//int pyat()
+//{
+//    int j,i, n=2,k=0;
+//    double **a;
+//    printf("Vvedite kol-vo uravneniy\n");
+//    scanf("%d", &n);
+//    a = (double**) malloc(n*sizeof(double*));
+//    for (i = 0; i < n; i++) {
+//        a[i] = (double*) malloc((n+1)*sizeof(double));
+//    }
+//    printf("Введите коэффициенты в виде:\nа11 а12 а13 ... а1n b1\nа21 а22 а23 ... а2n b2\n... ... ... ... ... ...\nam1 am2 am3 ... amn bn\n");
+//    for(i=0;i<n;i++){
+//        for(j=0;j<n+1;j++){
+//            scanf("%lf",&a[i][j]);
+//    } }
+//    int t = diagonal(a,n,1);
+//    if (t!=0){
+//    printf("Единицы на главной диагонали\n");
+//    for(i=0; i<n; i++, printf("\n"))
+//        for(j=0; j<n+1; j++)
+//            printf("%8.4lf  ",a[i][j]);
+//    root(a,n,1);
+//    printf("Единичная матрица \n");
+//    for(i=0; i<n; i++, printf("\n"))
+//        for(j=0; j<n+1; j++)
+//            printf("%8.4lf  ",a[i][j]);
+//    printf("Корни уравнения:");
+//    for (int i = 0; i < n; i++)
+//        printf("\n%lf   ", a[i][n]);}
+//
+//    return 0;
+//}
+//
 
 
 
-        if (max < 0.000001)
-        {
-            printf("Something went wrong");
-            return 0;  //столбец нулевой, всё плохо
-        }
-        int* temp = a[index];
-        a[index] = a[k];
-        a[k] = temp;     //меняем строки
-        for (int i = k; i < n; i++)
-            {
-                double temp = a[i][k];
-                if (fabs(temp) < 0.000001) continue;
-                for (int j = 0; j < n+m; j++)
-                    a[i][j] = a[i][j] / temp;//делим строку на элемент из главной диагонали
-                if (i == k)  continue;
-                for (int j = 0; j < n+m; j++)
-                    a[i][j] = a[i][j] - a[k][j];//вычитаем строку из строк ниже этой строки
-            }
-    k++;
-  }
 
 
-    return 1;
-}
-
-
-void root(double **a, int n, int m){     //обратный ход
-    for (int i = n - 1; i > -1; i--)
-    {
-        for (int row = i - 1; row > -1; row--)
-        {
-            double b = a[row][i] / a[i][i];
-            for (int col = n+m; col > -1; col--)
-                a[row][col] = a[row][col] - a[i][col] * b;
-
-        }
-    }
-
-
-
-}
-
-int multiplication(double **a, double **aa, double **c, int n)
-{   int i,j,k;
-
-
-  // Умножение матриц
-
-    for(i = 0; i < n; i++)
-    for(j = 0; j < n; j++)
-    {
-        c[i][j] = 0;
-        for(k = 0; k < n; k++)
-            c[i][j] += a[i][k+n] * aa[k][j];
-    }
-
-
-
-
-  return 0;}
-
-int pyat()
-{
-    int j,i, n=2,k=0;
-    double **a;
-    printf("Vvedite kol-vo uravneniy\n");
-    scanf("%d", &n);
-    a = (double**) malloc(n*sizeof(double*));
-    for (i = 0; i < n; i++) {
-        a[i] = (double*) malloc((n+1)*sizeof(double));
-    }
-    printf("Введите коэффициенты в виде:\nа11 а12 а13 ... а1n b1\nа21 а22 а23 ... а2n b2\n... ... ... ... ... ...\nam1 am2 am3 ... amn bn\n");
-    for(i=0;i<n;i++){
-        for(j=0;j<n+1;j++){
-            scanf("%lf",&a[i][j]);
-    } }
-    int t = diagonal(a,n,1);
-    if (t!=0){
-    printf("Единицы на главной диагонали\n");
-    for(i=0; i<n; i++, printf("\n"))
-        for(j=0; j<n+1; j++)
-            printf("%8.4lf  ",a[i][j]);
-    root(a,n,1);
-    printf("Единичная матрица \n");
-    for(i=0; i<n; i++, printf("\n"))
-        for(j=0; j<n+1; j++)
-            printf("%8.4lf  ",a[i][j]);
-    printf("Корни уравнения:");
-    for (int i = 0; i < n; i++)
-        printf("\n%lf   ", a[i][n]);}
-
-    return 0;
-}
-
-
-
-
-
-
-int shest()
-{
-    int j,i,  n=2,k=0;
-
-    double **a,**aa, **c;
-    double el;
-    printf("Введите количество строк\n");
-    scanf("%d", &n);
-    a = (double**) malloc(n*sizeof(double*)); //матрица (вводимая матрица|единичная матрица)
-    aa = (double**) malloc(n*sizeof(double*)); //копия левой половины матрицы
-    c = (double**) malloc(n*sizeof(double*));  //массив произведения
-    for (i = 0; i < n; i++) {
-        a[i] = (double*) calloc(2*n, sizeof(double));
-        aa[i] = (double*) calloc(n, sizeof(double));
-        c[i] = (double*) calloc(n, sizeof(double));
-    }
-    printf("Введите коэффициенты\n");
-    for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            scanf("%lf",&el);
-            a[i][j]=el;
-            aa[i][j]=el;
-    } }
-
-    for(i=0;i<n;i++){
-            a[i][i+n]=1;
-    }
-    printf("\nВведённая матрица:\n");
-    for(i=0; i<n; i++, printf("\n"))
-        for(j=0; j<2*n; j++)
-            printf("%8.4lf  ",a[i][j]);
-    printf("\n");
-    int t = diagonal(a,n,n);
-    if (t!=0){
+//int shest()
+//{
+//    int j,i,  n=2,k=0;
+//
+//    double **a,**aa, **c;
+//    double el;
+//    printf("Введите количество строк\n");
+//    scanf("%d", &n);
+//    a = (double**) malloc(n*sizeof(double*)); //матрица (вводимая матрица|единичная матрица)
+//    aa = (double**) malloc(n*sizeof(double*)); //копия левой половины матрицы
+//    c = (double**) malloc(n*sizeof(double*));  //массив произведения
+//    for (i = 0; i < n; i++) {
+//        a[i] = (double*) calloc(2*n, sizeof(double));
+//        aa[i] = (double*) calloc(n, sizeof(double));
+//        c[i] = (double*) calloc(n, sizeof(double));
+//    }
+//    printf("Введите коэффициенты\n");
+//    for(i=0;i<n;i++){
+//        for(j=0;j<n;j++){
+//            scanf("%lf",&el);
+//            a[i][j]=el;
+//            aa[i][j]=el;
+//    } }
+//
+//    for(i=0;i<n;i++){
+//            a[i][i+n]=1;
+//    }
+//    printf("\nВведённая матрица:\n");
+//    for(i=0; i<n; i++, printf("\n"))
+//        for(j=0; j<2*n; j++)
+//            printf("%8.4lf  ",a[i][j]);
+//    printf("\n");
+//    int t = diagonal(a,n,n);
+//    if (t!=0){
+////        for(i=0; i<n; i++, printf("\n"))
+////            for(j=0; j<2*n; j++)
+////                printf("%8.4lf  ",a[i][j]);
+////        printf("\n");
+//        root(a,n,n);
+//        printf("\nПриведение матрицы слева к единичному виду:\n");
 //        for(i=0; i<n; i++, printf("\n"))
 //            for(j=0; j<2*n; j++)
 //                printf("%8.4lf  ",a[i][j]);
-//        printf("\n");
-        root(a,n,n);
-        printf("\nПриведение матрицы слева к единичному виду:\n");
-        for(i=0; i<n; i++, printf("\n"))
-            for(j=0; j<2*n; j++)
-                printf("%8.4lf  ",a[i][j]);
-        printf("\nПолученная обратная матрица:\n");
-        for(i=0; i<n; i++, printf("\n"))
-            for(j=n; j<2*n; j++)
-                printf("%8.4lf  ",a[i][j]);
-        multiplication(a,aa,c, n);
-        printf("\nПроизведение матриц:\n");
-        for(i=0; i<n; i++, printf("\n"))
-            for(j=0; j<n; j++)
-                printf("%8.4lf  ",c[i][j]);
-
-}
-
-    return 0;
-}
+//        printf("\nПолученная обратная матрица:\n");
+//        for(i=0; i<n; i++, printf("\n"))
+//            for(j=n; j<2*n; j++)
+//                printf("%8.4lf  ",a[i][j]);
+//        multiplication(a,aa,c, n);
+//        printf("\nПроизведение матриц:\n");
+//        for(i=0; i<n; i++, printf("\n"))
+//            for(j=0; j<n; j++)
+//                printf("%8.4lf  ",c[i][j]);
+//
+//}
+//
+//    return 0;
+//}
 
 int main(){
     int nnn;
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
     while (1){
-    printf("\n1 - 9.1 \n2 - 9.2\n5 - 9.5 \n6 - 9.6 \n0 - leave\n");
+    printf("2 - 9.2\n0 - leave\n");
     scanf("%d",&nnn);
     switch(nnn){
-    case 1:
-        odin();
-        break;
 
     case 2:
         dva();
         break;
 
-    case 5:
-        pyat();
-        break;
-    case 6:
-        shest();
-        break;
+
 
     case 0:return 0;
     }}
